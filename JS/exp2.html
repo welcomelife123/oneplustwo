@@ -1,0 +1,71 @@
+
+<html>
+
+<head>
+
+<h5>42201_Pratiksha_Adatkar</h5>
+<title>Multiplication Table</title>
+</head>
+
+<body style="text-align: center; background-color: #ffffff;">
+<h1>Multiplication Table</h1>
+<label for="Given">
+Enter a number:
+</label>
+<input type="number" id="Given" placeholder="Enter a number">
+<br><br>
+<button onclick="tables()">Click Here For the Table</button>
+<button onclick="reset()">Reset</button> <!-- Added Reset Button -->
+
+<p>
+Multiplication Table using For Loop: <span id="displayf"></span>
+</p>
+<p>
+Multiplication Table using While Loop: <span id="displayw"></span>
+</p>
+<p>
+Multiplication Table using Do-While Loop: <span id="displayd"></span>
+</p>
+<script>
+function tables() {
+    var Given = Number(document.getElementById("Given").value);
+    var length = 10;
+    var i = 1;
+
+    // ------------- Using for loop -------------
+    var forML = "";
+    for (i = 1; i <= length; i++) {
+        forML += "<br>" + i + "*" + Given + "=" + (i * Given);
+    }
+    document.getElementById("displayf").innerHTML = forML;
+   
+    // ------------- Using while loop -------------
+    var whileML = "";
+    i = 1;
+    while (i <= length) {
+        whileML += "<br>" + i + "*" + Given + "=" + (i * Given);
+        i++;
+    }
+    document.getElementById("displayw").innerHTML = whileML;
+
+    // ------------- Using do-while loop -------------
+    var doML = "";
+    i = 1;
+    do {
+        doML += "<br>" + i + "*" + Given + "=" + (i * Given);
+        i++;
+    }
+    while (i <= length);
+    document.getElementById("displayd").innerHTML = doML;
+}
+
+function reset() {
+    document.getElementById("Given").value = ''; 
+    document.getElementById("displayf").innerHTML = ''; 
+    document.getElementById("displayw").innerHTML = '';
+    document.getElementById("displayd").innerHTML = '';
+}
+</script>
+</body>
+
+</html>

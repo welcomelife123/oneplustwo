@@ -1,0 +1,79 @@
+
+<html>
+<body>
+	<div>
+		<h2 style="text-align:center" >Area of Rectangle</h2>
+		<div style="text-align:center">
+		<div>
+
+<h3>42201_Pratiksha Adatkar</h3>
+<h1>Area of Different shapes</h1>
+<br><h3 style="color:blue">Rectangle Area Calculation</h3>
+
+length= <input type="number" id="length" >
+<br>
+breadth= <input type="number" id="breadth">
+<br>
+
+<button style="background:white" onclick="rectangle()">Calculate</button>
+<button style="background:white" onclick="resetRectangle()">Reset</button>
+
+Area=<h4 id="area_rectangle"></h4>
+
+<br><h3 style="color:blue">Circle Area Calculation</h3>
+radius= <input type="number" id="radius" >
+<br>
+
+<button style="background:white" onclick="circle()">Calculate</button>
+<button style="background:white" onclick="resetCircle()">Reset</button>
+
+Area=<h4 id="area_circle"> </h4>
+
+<br><h3 style="color:blue">Triangle Area Calculation</h3>
+Side A= <input type="number" id="sidea" ><br>
+Side B= <input type="number" id="sideb" ><br>
+Side C= <input type="number" id="sidec" >
+<br>
+
+<button style="background:white" onclick="triangle()">Calculate</button>
+<button style="background:white" onclick="resetTriangle()">Reset</button>
+
+Area=<h4 id="area_triangle"></h4>
+
+<script>
+	function rectangle(){
+		var len = parseInt(document.getElementById("length").value);
+		var bre = parseInt(document.getElementById("breadth").value);
+		document.getElementById("area_rectangle").innerHTML = len * bre;
+	}
+	function resetRectangle() {
+		document.getElementById("length").value = '';
+		document.getElementById("breadth").value = '';
+		document.getElementById("area_rectangle").innerHTML = '';
+	}
+
+	function circle(){
+		var rad = parseInt(document.getElementById("radius").value);
+		document.getElementById("area_circle").innerHTML = Math.PI * rad * rad;
+	}
+	function resetCircle() {
+		document.getElementById("radius").value = '';
+		document.getElementById("area_circle").innerHTML = '';
+	}
+
+	function triangle(){
+		var a = parseInt(document.getElementById("sidea").value);
+		var b = parseInt(document.getElementById("sideb").value);
+		var c = parseInt(document.getElementById("sidec").value);
+		const s = (a + b + c) / 2;
+		document.getElementById("area_triangle").innerHTML = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+	}
+	function resetTriangle() {
+		document.getElementById("sidea").value = '';
+		document.getElementById("sideb").value = '';
+		document.getElementById("sidec").value = '';
+		document.getElementById("area_triangle").innerHTML = '';
+	}
+</script>
+</body>
+</html>

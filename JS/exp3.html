@@ -1,0 +1,74 @@
+
+<html>
+<body style = "text-align: center;">
+ <h1>String Operations</h1>
+ <h3>42201_Pratiksha_Adatkar</h3>
+ <br>
+ String = <input type="text" id="input"><br><br>
+ <button onclick="set_string()">Perform Operations</button>
+ <br><br>
+ <h2>User Defined Method : </h2>
+ <p>
+ String : <span id="string"></span>
+ </p>
+ <h2>Inbuilt Method : </h2>
+ <p>
+ 
+ </p>
+ <h2>User Defined Method : </h2>
+ <p>
+ Reverse String : <span id="reverse"></span>
+ </p>
+ <h2>Inbuilt Method : </h2>
+ <p>
+ 
+ </p>
+ <h2>User Defined Method : </h2>
+ <p>
+ Pallindrome Check: <span id="palindrome"></span>
+ </p>
+ <h2>Inbuilt Method : </h2>
+ <p>
+ 
+ </p>
+ <br><br>
+ <h3>Index position to replace character =</h3> <input type="number" id="change_index"><br>
+ <h3>Character to replace at above index position = </h3><input type="text" 
+id="change_char"><br><br>
+ <button onclick="replace()">Replace Char</button>
+ <br><br>
+ <p>
+ <strong>Updated string : </strong><span id="updated_string"></span>
+ </p>
+ 
+ <script>
+ function set_string() {
+ var st = document.getElementById("input").value;
+ document.getElementById("string").innerHTML = st;
+ rev(st);
+ }
+ function rev(s) {
+ const arrayStrings = s.split("");
+ const reverseArray = arrayStrings.reverse();
+ const joinArray = reverseArray.join("");
+ document.getElementById("reverse").innerHTML = joinArray;
+ palin(s, joinArray);
+ }
+ function palin(s, re) {
+ if (s == re) {
+ document.getElementById("palindrome").innerHTML = "Palindrome";
+ }
+ else {
+ document.getElementById("palindrome").innerHTML = "Not Palindrome";
+ }
+ }
+ function replace() {
+ var s = document.getElementById("input").value;
+ var i = parseInt(document.getElementById("change_index").value);
+ var c = document.getElementById("change_char").value;
+ var r = s.substring(0, i-1) + c + s.substring(i + 1);
+ document.getElementById("updated_string").innerHTML = r;
+ }
+ </script>
+</body>
+</html>

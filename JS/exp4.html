@@ -1,0 +1,98 @@
+<html>
+
+<head>
+    <h3>42201_Pratiksha_Adatkar </h3>
+    <title>String Comparison</title>
+</head>
+<body style="text-align: center;">
+    <center>
+    <h2>Exp_4 :String Comparison</h2>
+    <input type="text" id="string1" placeholder="String 1">
+    <br>
+    <br>
+    <input type="text" id="string2" placeholder="String 2">
+    <br>
+    <br>
+    <button onclick="compareEquality()">Compare Equality</button>
+    <div id="resultEquality"></div>
+    <br>
+    <br>
+    <button onclick="compareLength()">Compare Length</button>
+    <div id="resultLength"></div>
+    <br>
+    <br>
+    <button onclick="compareLocaleCompare()">Compare localeCompare()</button>
+    <div id="resultLocaleCompare"></div>
+    <br>
+    <br>
+    <button onclick="resetfields()">Reset</button>
+
+<script>
+   function compareEquality() 
+  {
+    const string1 = document.getElementById('string1').value;
+    const string2 = document.getElementById('string2').value;
+    const result = document.getElementById('resultEquality');
+
+    if (string1 === string2) 
+    {
+      result.innerHTML = 'Strings are equal using equality operator';
+    } 
+    else 
+    {
+      result.innerHTML = 'Strings are not equal using equality operator';
+    }
+  }
+
+  function compareLength() 
+  {
+    const string1 = document.getElementById('string1').value;
+    const string2 = document.getElementById('string2').value;
+    const result = document.getElementById('resultLength');
+
+    if(string1.length>string2.length || string2.length>string1.length)
+    {
+        result.innerHTML = 'Strings are not equal using length comparison';
+    }
+    else if(string1 === string2)
+    {
+        result.innerHTML = 'Strings are equal';
+    }
+    else 
+    {
+        result.innerHTML = 'Strings are not equal';
+    }
+  }
+ 
+  function compareLocaleCompare() 
+  {
+    const string1 = document.getElementById('string1').value;
+    const string2 = document.getElementById('string2').value;
+    const result = document.getElementById('resultLocaleCompare');
+
+    if (string1.localeCompare(string2) === 0) 
+    {
+      result.innerHTML = 'Strings are equal using localeCompare() function';
+    } 
+    else if (string1.localeCompare(string2) === 1)
+    {
+        result.innerHTML = 'String 1 is greater than String 2';
+    }
+    else
+    {
+        result.innerHTML = 'String 2 is greater than String 1';
+    }
+  }
+
+  function resetfields()
+   {
+    document.getElementById('string1').value = '';
+    document.getElementById('string2').value = '';
+    document.getElementById('resultEquality').innerHTML = '';
+    document.getElementById('resultLength').innerHTML = '';
+    document.getElementById('resultLocaleCompare').innerHTML = '';
+  }
+
+</script>
+</body>
+</html>

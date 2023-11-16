@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    <title>Assignment 9</title>
+</head>
+
+<body style="text-align: center">
+    <h1>42201_Pratiksha_Adatkar</h1>
+    <div class="container">
+        <form action="#" name="StudentRegistration" onsubmit="return(validate());">
+            <br />
+            <div>
+                <tr>
+                    <td>Name</td>
+                    <td>
+                        <input type="text" name="textnames" id="textname" size="30" />
+                    </td>
+                </tr>
+            </div>
+            <br />
+            <div>
+                <tr>
+                    <td>EmailId</td>
+                    <td><input type="text" name="emailid" id="emailid" size="30" /></td>
+                </tr>
+            </div>
+            <br />
+            <div>
+                <tr>
+                    <td>MobileNo</td>
+                    <td>
+                        <input type="text" name="mobileno" id="mobileno" size="30" />
+                    </td>
+                </tr>
+
+            </div>
+            <br />
+            <div>
+                <tr>
+                    <td>City</td>
+                    <td><input type="text" name="city" id="city" size="30" /></td>
+                </tr>
+            </div>
+            <br />
+            <div>
+                <tr>
+                    <td>State</td>
+                    <td><input type="text" name="State" id="State" size="30" /></td>
+                </tr>
+            </div>
+            <br />
+            <div>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <select name="Gender" id="Gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </td>
+                </tr>
+            </div>
+            <br />
+            <div>
+                <tr>
+                    <td>Address</td>
+                    <td><input type="text" name="Address" id="Address" size="30" /></td>
+                </tr>
+            </div>
+            <br />
+            <div>
+                <tr>
+                    <td><input type="reset" /></td>
+                    <td colspan="2"><input type="submit" value="Submit Form" onclick="displayOutput()" /></td>
+                </tr>
+            </div>
+        </form>
+    </div>
+    <hr />
+    <div>
+        <button id="displayOutput" onclick="displayOutput()">Display</button>
+        <p id="outName"></p>
+        <p id="outEmailId"></p>
+        <p id="outMobileno""></p>
+        <p id=" outCity"></p>
+        <p id="outState"></p>
+        <p id="outGender"></p>
+        <p id="outAddress"></p>
+    </div>
+    <script src="exp9.js"></script>
+</body>
+
+</html>

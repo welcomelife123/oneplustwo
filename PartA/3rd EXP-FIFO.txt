@@ -1,0 +1,187 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity FIFO_4x8 is
+    Port ( rst : in  STD_LOGIC;
+           clk : in  STD_LOGIC;
+           addr : in  STD_LOGIC_VECTOR (1 downto 0) := "00";
+           d_in : in  STD_LOGIC_VECTOR (7 downto 0);
+           rd_wr : in  STD_LOGIC;
+           d_out : out  STD_LOGIC_VECTOR (7 downto 0) := "00000000";
+           empty : out  STD_LOGIC := '1';
+           full : out  STD_LOGIC := '0');
+end FIFO_4x8;
+
+architecture FIFO_4x8_arch of FIFO_4x8 is
+
+TYPE mem IS ARRAY(3 DOWNTO 0) OF STD_LOGIC_VECTOR (7 DOWNTO 0);
+SIGNAL memory : mem := (others=>(others=>'0'));
+
+begin
+
+    PROCESS(rst, clk, addr, d_in, rd_wr)
+
+	 begin
+
+	     if rst = '1' then
+		      d_out <= "00000000";
+				empty <= '1';
+				full <= '0';
+				memory <= (others=>(others=>'0'));
+
+        elsif falling_edge(clk) then
+
+            case rd_wr is
+
+				    when '0' =>
+
+					     d_out <= memory(conv_integer(addr));
+						  empty <= '0';
+				        full <= '1';
+
+				    when others =>
+
+					     memory(conv_integer(addr)) <= d_in;
+						  empty <= '0';
+						  if addr = "11" then
+				            full <= '1';
+						  else
+				            full <= '0';
+						  end if;
+            end case;
+        end if;
+    end process;
+
+end FIFO_4x8_arch;
+
+
+
+TESTBENCH CODE:
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+use ieee.numeric_std.ALL;
+ 
+ENTITY FIFO_4x8_tb IS
+END FIFO_4x8_tb;
+ 
+ARCHITECTURE behavior OF FIFO_4x8_tb IS 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+ 
+    COMPONENT FIFO_4x8
+    PORT(
+         rst : IN  std_logic;
+         clk : IN  std_logic;
+         addr : IN  std_logic_vector(1 downto 0);
+         d_in : IN  std_logic_vector(7 downto 0);
+         rd_wr : IN  std_logic;
+         d_out : OUT  std_logic_vector(7 downto 0);
+         empty : OUT  std_logic;
+         full : OUT  std_logic
+        );
+    END COMPONENT;
+    
+
+   --Inputs
+   signal rst : std_logic := '0';
+   signal clk : std_logic := '1';
+   signal addr : std_logic_vector(1 downto 0) := (others => '0');
+   signal d_in : std_logic_vector(7 downto 0) := (others => '0');
+   signal rd_wr : std_logic := '0';
+
+ 	--Outputs
+   signal d_out : std_logic_vector(7 downto 0);
+   signal empty : std_logic;
+   signal full : std_logic;
+
+   -- Clock period definitions
+   constant clk_period : time := 10 ns;
+ 
+BEGIN
+ 
+	-- Instantiate the Unit Under Test (UUT)
+   uut: FIFO_4x8 PORT MAP (
+          rst => rst,
+          clk => clk,
+          addr => addr,
+          d_in => d_in,
+          rd_wr => rd_wr,
+          d_out => d_out,
+          empty => empty,
+          full => full
+        );
+
+   -- Clock process definitions
+   clk_process :process
+   begin
+		clk <= not(clk);
+		wait for clk_period/2;
+   end process;
+ 
+
+   -- Stimulus process
+   stim_proc: process
+   begin
+		
+		
+	
+		rd_wr <= '1';
+		for address in 0 to 3 loop
+			addr <= std_logic_vector(to_unsigned(address, 2));
+			d_in <= std_logic_vector(to_unsigned(63*(address + 1), 8));
+			wait for clk_period*2;
+		end loop;
+		
+		d_in <= std_logic_vector(to_unsigned(0, 8));
+		
+		rd_wr <= '0';
+		for address in 0 to 3 loop
+			addr <= std_logic_vector(to_unsigned(address, 2));
+			wait for clk_period*2;
+		end loop;
+		
+   end process;
+	
+	stim_proc_reset :PROCESS
+	                 BEGIN
+						  
+						   wait for clk_period*12;
+                     rst <= '1';
+		               wait for clk_period*2;
+		               rst <= '0';
+		               wait ;
+							
+							end process;
+													
+
+END;
+
+
+
+PINS:
+
+# PlanAhead Generated physical constraints
+
+NET "d_in[7]" LOC = P165; #sw4-0
+NET "d_in[6]" LOC = P167; #sw4-1
+NET "d_in[5]" LOC = P163; #sw4-2
+NET "d_in[4]" LOC = P164;
+NET "d_in[3]" LOC = P161;
+NET "d_in[2]" LOC = P162;
+NET "d_in[1]" LOC = P160;
+NET "d_in[0]" LOC = P153; #sw4-7
+NET "d_out[7]" LOC = P179; #sw3-0
+NET "d_out[6]" LOC = P180; #sw3-1
+NET "d_out[5]" LOC = P177;
+NET "d_out[4]" LOC = P178;
+NET "d_out[3]" LOC = P152;
+NET "d_out[2]" LOC = P168;
+NET "d_out[1]" LOC = P171;
+NET "d_out[0]" LOC = P172; #sw3-7
+NET "clk" LOC = P132;
+NET "rst" LOC = P204; #k0
+NET "rd_wr" LOC = P184; #sw2-6
+NET "empty" LOC = P199;#sw1-6
+NET "full" LOC = P196; #sw1-7
